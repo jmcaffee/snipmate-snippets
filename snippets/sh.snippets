@@ -41,3 +41,171 @@ snippet go
 # Set SCRIPT_DIR variable to directory script is located.
 snippet sdir
 	SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# kTech
+snippet filecmt
+	#!/usr/bin/env bash
+	##############################################################################
+	# File::    `Filename()`
+	# Purpose:: ${1:filedescription}
+	# 
+	# Author::    Jeff McAffee `strftime("%m/%d/%Y")`
+	# Copyright:: Copyright (c) `strftime("%Y")`, kTech Systems LLC. All rights reserved.
+	# Website::   http://ktechsystems.com
+	##############################################################################
+	${2}
+# Note two things about this snippet:
+# * Backticks can be escaped by prefixing them with a backslash
+# * To prevent snipmate from eating a '$0', write it as $${0:0}
+#   	The second string is used as default. eg. $${0:1} = '$1'
+snippet skel
+	##############################################
+	# Functions
+	#
+	
+	usage() {
+		echo "Usage: sudo \`basename $${0:0}\` {${2:arg}}"
+	}
+	
+	#---------------------------------------------
+	# required_uid
+	#
+	# Return the required UID (sudo) based on OS.
+	#
+	# Retrieve the result using:
+	# uid=$?
+	#
+	required_uid () {
+			local required_uid=500
+			# Set required UID to 500 by default (for windows).
+			if [[ "x$(uname)" == "xLinux" ]]; then
+					required_uid=0;
+			fi
+	
+			return $required_uid
+	
+	}
+	
+	
+	##############################################
+	# Validation Checks
+	#
+	
+	# Determine required UID based on OS.
+	required_uid
+	req_uid=$?
+	
+	# Check for proper number of command line args.
+	expected_args=${1:number_of_args}
+	E_BADARGS=65
+	if [ $UID -ne $req_uid ] || [ $# -ne $expected_args ]
+	then
+			usage
+			exit $E_BADARGS
+	fi
+	
+	
+	##############################################
+	# Script
+	#
+	
+	${3}
+snippet ###
+	##############################################
+	# ${1:Section Comment}
+	#
+
+	${2}
+# Exported function snippet
+snippet funce
+	#---------------------------------------------
+	# ${1:function_name}
+	#
+	# ${2:Function Description}
+	#
+	function $1 () {
+		local ${3:varname}="${4}"
+		${5}
+	}
+	export -f $1
+	
+	
+	
+# Simple function snippet
+snippet func
+	#---------------------------------------------
+	# ${1:function_name}
+	#
+	# ${2:Function Description}
+	#
+	$1 () {
+		local ${3:varname}="${4}"
+		${5}
+	}
+	
+	
+# Set a variable to value or default
+# Correct format: $myvar=${another_var:-default_value}
+snippet dvar
+	${1:varname}=${0:$}{${2:inputvar}:-${3:$default}}		# Defaults to $3.
+	${4}
+# Set a variable to value of cmd line param or default
+snippet fvar
+	${1:varname}=${0:$}{${2:cmd_input_param}:-${3:$default}}		# Defaults to $3.
+	${4}
+# Test
+snippet test
+	describe "${1:Object Being Tested}"
+		describe "${2:when ...}"
+	
+			# :before
+			${3:somevar}="${4:someval}"
+			
+			it "${5:should ...}"
+				actual="${6}"
+				expected="${7}"
+				${8}
+				if [[ "x$actual" != "x$expected" ]]; then
+						fail "fail\n  Expected: $expected\n  Actual:   $actual"
+				else
+						pass
+				fi
+			end_it # $5
+
+		end_describe # $2
+
+	end_describe # $1
+	
+# describe block
+snippet describe
+	describe "${1:when ...}"
+			${2}	
+	end_describe # $1
+	
+# it block
+snippet it
+	it "${1:should ...}"
+			${2}	
+	end_it # $1
+	
+# test skeleton
+snippet tskel
+	SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+	TARGET_SRC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+	TARGET_PATH=$TARGET_SRC_DIR/${1:path_to_file_under_test}
+	source $TARGET_PATH
+	source $SCRIPT_DIR/helper_functions
+	
+	# Describe your tests using 'describe', 'it', 'pass' and 'fail'.
+	#
+	# describe "when ..."
+	#   describe "when ..."
+	#           it "should ..."
+	#                   pass "pass"
+	#           end_it # should ...
+	#   end_describe # when ...
+	# end_describe # when ...
+	#
+	# Try snippet 'test'...
+	#
+	
+	test${2}

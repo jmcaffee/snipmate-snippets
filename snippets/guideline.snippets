@@ -1,0 +1,162 @@
+########################################
+# GDL snippets - for GDLC, see below #
+########################################
+
+#
+#
+# DPM Snippets
+#
+#
+# dpm text
+snippet dpmt
+	dpm text ${1:dpmName} "${2:DPM Name}";${3}
+	    tempString  = $1;
+# dpm money
+snippet dpmm
+	dpm numeric(2) ${1:dpmName} "${2:DPM Name}";${3}
+	    tempString  = $1;
+# dpm numeric
+snippet dpmn
+	dpm numeric ${1:dpmName} "${2:DPM Name}";${3}
+	    tempString  = $1;
+# dpm numeric (with precision)
+snippet dpm3
+	dpm numeric(${1:3}) ${2:dpmName} "${3:DPM Name}";${4}
+	    tempString  = $2;
+# dpm rate [numeric(3)]
+snippet dpmr
+	dpm numeric(3) ${1:dpmName} "${2:DPM Name}";${3}
+	    tempString  = $1;
+#
+#
+# DSM Snippets
+#
+#
+# dsm text
+snippet dsmt
+	decision    dpm text ${1:dpmName}        "${2:DPM Name}";${3}
+	    tempString  = $1;
+# dsm money
+snippet dsmm
+	decision    dpm numeric(2) ${1:dpmName}        "${2:DPM Name}";${3}
+	    tempString  = $1;
+# dsm numeric
+snippet dsmn
+	decision    dpm numeric ${1:dpmName}        "${2:DPM Name}";${3}
+	    tempString  = $1;
+# dsm numeric (with precision)
+snippet dsm3
+	decision    dpm numeric(${1:3}) ${2:dpmName}        "${3:DPM Name}";${4}
+	    tempString  = $2;
+# dsm rate [numeric(3)]
+snippet dsmr
+	decision    dpm numeric(3) ${1:dpmName}        "${2:DPM Name}";${3}
+	    tempString  = $1;
+#
+#
+# PPM Snippets
+#
+#
+# ppm definition [text]
+snippet ppmt
+	ppm text        app         ${1:pPpmName}                                    "${2:PPM Alias}";${3}
+# ppm definition [numeric]
+snippet ppmn
+	ppm numeric     app         ${1:pPpmName}                                    "${2:PPM Alias}";${3}
+#
+#
+# Rule Snippets
+#
+#
+# rule
+snippet ru
+	rule ${1:RuleName}();
+	${2}
+# rule statement
+snippet rule
+	rule ${1:RuleName}()
+	  ${2}
+	end // rule
+# if statement
+snippet if
+	if(${1:var} ${2:!=} ${3:var})
+	then
+	  ${4:var} = ${5:var};
+	  ${6}
+	end
+snippet ife
+	if(${1:var} ${2:!=} ${3:var})
+	then
+	  ${4:var} = ${5:var};
+	else
+	  ${6}
+	end
+# if (( statement
+snippet if((
+	if(
+		(${1:var} ${2:!=} ${3:var}) &&
+		(${4:var} ${5:!=} ${6:var})
+	)
+	then
+	  ${7:var} = ${8:var};
+	  ${9}
+	end
+# Assignment statement
+snippet z=
+	${1:varname} = ${2:varname};
+	${3}
+#
+#
+# RuleSet Snippets
+#
+#
+# ruleset
+snippet rs
+	ruleset ${1:RuleSetName}();
+	${2}
+# ruleset
+snippet rules
+	ruleset ${1:RuleSetName}(${2:continue})
+	
+	
+	  ${3}
+	
+	
+	end // ruleset $1
+#
+#
+# Misc Snippets
+#
+#
+# include("gdl");
+snippet inc
+	include("${1:filename}.gdl");
+	${2}
+# import( importType,"csvFileToImport");
+snippet im
+	import(${1:powerlookup}, "${2:csvFileToImport}");
+	${3}
+#
+#
+# Comment Snippets
+#
+#
+snippet filecmt
+	/* ***************************************************************************
+	  File:     `Filename()`.gdl
+	  Purpose:  ${1:filedescription}
+	
+	  Author:   Jeff McAffee `strftime("%m/%d/%Y")`
+	
+	*************************************************************************** */
+	${2}
+#
+#
+#
+# Functions
+#
+#
+#
+# indexof function
+snippet indexof
+	indexof(IN ${1:"haystack"}, IN ${2:"needle"})${3}

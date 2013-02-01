@@ -1,0 +1,28 @@
+########################################
+# Primary Parameter SQL snippets       #
+# To easily access these snippets, set your filetype to ppm.xml:
+#   :setf ppm.xml
+########################################
+
+#
+#
+# SQL Snippets
+#
+#
+# ppmsql
+snippet ppmsql
+	<PPM ID="${1:9999}" Name="${2:Ppm Name}" Datatype="${3:Text}" Type="APM" Customer="${4:AMS, HSBC}">
+		<CQFunction Output="$3" Name="CQXPath">
+			<Args Type="XPath">
+				<DATA><![CDATA[//LOCKS/LOCK/LOCKEDITEM[@Name="${5:Dpm Name}"]/@Value]]></DATA>
+			</Args>
+		</CQFunction>
+	</PPM>
+	<!-- SQL Statement
+	GO
+	IF EXISTS(SELECT PPM_ID FROM CQT_PRIMARY_PARAM WHERE PPM_ID = $1)
+	UPDATE CQT_PRIMARY_PARAM SET PPM_NAME = '$2', PPM_PDT_ID = ${6:6}, PPM_PTP_ID = 1, PPM_PATH = '<CQFunction Output="$3" Name="CQXPath"><Args Type="XPath"><DATA><![CDATA[//LOCKS/LOCK/LOCKEDITEM[@Name="$5"]/@Value]]></DATA></Args></CQFunction>' WHERE PPM_ID = $1
+	ELSE
+	INSERT INTO CQT_PRIMARY_PARAM(PPM_ID, PPM_NAME, PPM_PDT_ID, PPM_PTP_ID, PPM_PATH) VALUES ($1, '$2', $6, 1, '<CQFunction Output="$3" Name="CQXPath"><Args Type="XPath"><DATA><![CDATA[//LOCKS/LOCK/LOCKEDITEM[@Name="$5"]/@Value]]></DATA></Args></CQFunction>')
+	-->${7}
+
