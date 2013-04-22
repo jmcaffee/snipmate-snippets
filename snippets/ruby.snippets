@@ -23,7 +23,7 @@ snippet beg
 	end # begin-rescue $1
 
 snippet req
-	require "${1}"${2}
+	require '${1}'${2}
 snippet #
 	# =>
 snippet end
@@ -959,18 +959,8 @@ snippet defcmt
 	#${7}
 snippet defc
 	###
-	# ${4:method description}
+	# ${1:method desc}
 	#
-	# *Args*
+	# @param ${2:name} [${3:type}] ${4:desc}
 	#
-	# +$2+ -- ${5:description}
-	#
-	# +$3+ -- ${6:description}
-	#
-	# *Returns*
-	#
-	# ${7:return param description}
-	#
-	def ${1:method_name}(${2:arg1}, ${3:arg2})
-		${8}
-	end
+	# @return [${5:types}] ${6:desc}

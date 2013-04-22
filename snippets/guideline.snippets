@@ -133,7 +133,7 @@ snippet inc
 	include("${1:filename}.gdl");
 	${2}
 # import( importType,"csvFileToImport");
-snippet im
+snippet imp
 	import(${1:powerlookup}, "${2:csvFileToImport}");
 	${3}
 #
@@ -160,3 +160,14 @@ snippet filecmt
 # indexof function
 snippet indexof
 	indexof(IN ${1:"haystack"}, IN ${2:"needle"})${3}
+#
+#
+#
+# Conditions
+#
+#
+#
+snippet cond
+	condition ${1:identifier} ("${2:system_name}", ${3:category}, ${4:priorto}, "${5:image_doc_type}", "${6:External}",
+	                           "${7:Stipulation Text}");
+	${8}
