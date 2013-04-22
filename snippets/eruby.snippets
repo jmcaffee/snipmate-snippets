@@ -40,7 +40,7 @@ snippet lica
 snippet licai
 	<%= link_to '${1:link text...}', :controller => '${2:items}', :action => '${3:edit}', :id => ${4:@item} %>
 snippet yield
-	<%= yield${1::content_symbol}%>${2}
+	<%= yield ${1::content_symbol} %>${2}
 snippet conf
 	<% content_for :${1:head} do %>
 		${2}
@@ -80,10 +80,6 @@ snippet fftf
 snippet fields
 	<% fields_for :${1:model}, @$1 do |${2:f}| %>
 		${3}
-	<% end %>
-snippet ff
-	<%= form_for @${1:model} do |f| %>
-		${2}
 	<% end %>
 snippet i18
 	I18n.t('${1:type.key}')${2}
