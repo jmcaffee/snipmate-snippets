@@ -171,3 +171,62 @@ snippet cond
 	condition ${1:identifier} ("${2:system_name}", ${3:category}, ${4:priorto}, "${5:image_doc_type}", "${6:External}",
 	                           "${7:Stipulation Text}");
 	${8}
+#
+#
+#
+# Messages
+#
+#
+#
+# Findings Message
+snippet messf
+	message(findings, "${1:findings message}");
+	${2}
+# Exception Message
+snippet messe
+	message(exception, "${1:exception message}");
+	${2}
+# Temp Snippet
+snippet hase0
+	rule Parse-Stage-0${1:num}()
+	  if(tempString != NULL)
+	  then
+	    tempCode = Concat(IN "0", IN "$1");  // Have to use Concat so AMS doesn't drop the leading zero.
+	    tempNumber = indexof(IN tempString, IN tempCode);
+	  end
+	
+	end // rule
+	
+	
+	rule Set-Stage-0$1()
+	  if(tempNumber >= 0)
+	  then
+	    hasEntered$1 = "Y";
+	  end
+	
+	end // rule
+	
+	
+	${2}
+# Temp Snippet
+snippet hasen
+	rule Parse-Stage-${1:num}()
+	  if(tempString != NULL)
+	  then
+	    tempCode = "$1";
+	    tempNumber = indexof(IN tempString, IN tempCode);
+	  end
+	
+	end // rule
+	
+	
+	rule Set-Stage-$1()
+	  if(tempNumber >= 0)
+	  then
+	    hasEntered$1 = "Y";
+	  end
+
+	end // rule
+	
+	
+	${2}
