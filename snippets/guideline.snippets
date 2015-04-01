@@ -9,23 +9,23 @@
 #
 # dpm text
 snippet dpmt
-	dpm text ${1:dpmName} "${2:DPM Name}";${3}
+	dpm text ${1:dpmName} "${2:DPM Name}";${0}
 	    tempString  = $1;
 # dpm money
 snippet dpmm
-	dpm numeric(2) ${1:dpmName} "${2:DPM Name}";${3}
+	dpm numeric(2) ${1:dpmName} "${2:DPM Name}";${0}
 	    tempString  = $1;
 # dpm numeric
 snippet dpmn
-	dpm numeric ${1:dpmName} "${2:DPM Name}";${3}
+	dpm numeric ${1:dpmName} "${2:DPM Name}";${0}
 	    tempString  = $1;
 # dpm numeric (with precision)
 snippet dpm3
-	dpm numeric(${1:3}) ${2:dpmName} "${3:DPM Name}";${4}
+	dpm numeric(${1:3}) ${2:dpmName} "${3:DPM Name}";${0}
 	    tempString  = $2;
 # dpm rate [numeric(3)]
 snippet dpmr
-	dpm numeric(3) ${1:dpmName} "${2:DPM Name}";${3}
+	dpm numeric(3) ${1:dpmName} "${2:DPM Name}";${0}
 	    tempString  = $1;
 #
 #
@@ -34,23 +34,23 @@ snippet dpmr
 #
 # dsm text
 snippet dsmt
-	decision    dpm text ${1:dpmName}        "${2:DPM Name}";${3}
+	decision    dpm text ${1:dpmName}        "${2:DPM Name}";${0}
 	    tempString  = $1;
 # dsm money
 snippet dsmm
-	decision    dpm numeric(2) ${1:dpmName}        "${2:DPM Name}";${3}
+	decision    dpm numeric(2) ${1:dpmName}        "${2:DPM Name}";${0}
 	    tempString  = $1;
 # dsm numeric
 snippet dsmn
-	decision    dpm numeric ${1:dpmName}        "${2:DPM Name}";${3}
+	decision    dpm numeric ${1:dpmName}        "${2:DPM Name}";${0}
 	    tempString  = $1;
 # dsm numeric (with precision)
 snippet dsm3
-	decision    dpm numeric(${1:3}) ${2:dpmName}        "${3:DPM Name}";${4}
+	decision    dpm numeric(${1:3}) ${2:dpmName}        "${3:DPM Name}";${0}
 	    tempString  = $2;
 # dsm rate [numeric(3)]
 snippet dsmr
-	decision    dpm numeric(3) ${1:dpmName}        "${2:DPM Name}";${3}
+	decision    dpm numeric(3) ${1:dpmName}        "${2:DPM Name}";${0}
 	    tempString  = $1;
 #
 #
@@ -59,10 +59,10 @@ snippet dsmr
 #
 # ppm definition [text]
 snippet ppmt
-	ppm text        app         ${1:pPpmName}                                    "${2:PPM Alias}";${3}
+	ppm text        app         ${1:pPpmName}                                    "${2:PPM Alias}";${0}
 # ppm definition [numeric]
 snippet ppmn
-	ppm numeric     app         ${1:pPpmName}                                    "${2:PPM Alias}";${3}
+	ppm numeric     app         ${1:pPpmName}                                    "${2:PPM Alias}";${0}
 #
 #
 # Rule Snippets
@@ -71,25 +71,25 @@ snippet ppmn
 # rule
 snippet ru
 	rule ${1:RuleName}();
-	${2}
+	${0}
 # rule statement
 snippet rule
 	rule ${1:RuleName}()
-	  ${2}
-	end // rule
+	  ${0}
+	end
 # if statement
 snippet if
 	if(${1:var} ${2:!=} ${3:var})
 	then
 	  ${4:var} = ${5:var};
-	  ${6}
+	  ${0}
 	end
 snippet ife
 	if(${1:var} ${2:!=} ${3:var})
 	then
 	  ${4:var} = ${5:var};
 	else
-	  ${6}
+	  ${0}
 	end
 # if (( statement
 snippet if((
@@ -99,12 +99,12 @@ snippet if((
 	)
 	then
 	  ${7:var} = ${8:var};
-	  ${9}
+	  ${0}
 	end
 # Assignment statement
 snippet z=
 	${1:varname} = ${2:varname};
-	${3}
+	${0}
 #
 #
 # RuleSet Snippets
@@ -113,15 +113,12 @@ snippet z=
 # ruleset
 snippet rs
 	ruleset ${1:RuleSetName}();
-	${2}
+	${0}
 # ruleset
 snippet rules
 	ruleset ${1:RuleSetName}(${2:continue})
 	
-	
-	  ${3}
-	
-	
+	  ${0}
 	end // ruleset $1
 #
 #
@@ -131,11 +128,11 @@ snippet rules
 # include("gdl");
 snippet inc
 	include("${1:filename}.gdl");
-	${2}
+	${0}
 # import( importType,"csvFileToImport");
 snippet imp
 	import(${1:powerlookup}, "${2:csvFileToImport}");
-	${3}
+	${0}
 #
 #
 # Comment Snippets
@@ -149,7 +146,7 @@ snippet filecmt
 	  Author:   Jeff McAffee `strftime("%m/%d/%Y")`
 	
 	*************************************************************************** */
-	${2}
+	${0}
 #
 #
 #
@@ -157,9 +154,48 @@ snippet filecmt
 #
 #
 #
+# DateAdd function
+snippet datea
+	DateAdd(${1:"startDate"}, ${2:"number"}, ${3:"d"});${0}
+# DateDiff function
+snippet dated
+	DateDiff(${1:"startDate"}, ${2:"endDate"}, ${3:"d"});${0}
+# DateParse function
+snippet datepars
+	DateParse(${1:"month"}, ${2:"day"}, ${3:"year"});${0}
+# DatePart function
+snippet datepart
+	DatePart(${1:"dateToParse"}, ${2:"D"}, ${3:"status"});${0}
+# DateValid function
+snippet datev
+	DateValid(${1:"dateToCheck"});${0}
 # indexof function
 snippet indexof
-	indexof(IN ${1:"haystack"}, IN ${2:"needle"})${3}
+	indexof(IN ${1:"haystack"}, IN ${2:"needle"})${0}
+# GetLockedValue function
+snippet getl
+	GetLockedValue(${1:"Text"}, ${2:"dsm"}, ${3:"LockName"});${0}
+# GetSavedDsmValue function
+snippet gets
+	GetSavedDsmValue(${1:"Text"}, ${2:"dsm"});${0}
+# GetTaskValue function
+snippet gett
+	GetTaskValue(${1:"Text"}, ${2:"TaskName"}, ${3:"Status"});${0}
+# join function
+snippet join
+	join(IN ${1:"string1"}, IN ${2:"string2"}, ${3:"separator"});${0}// Default separator is space
+# PMTParam function
+snippet pmtp
+	PMTParam(${1:"upb"}, ${2:"payment"}, ${3:"rateAsPerc"}, ${4:"term"}, ${5:"CalcType:Rate|Term|PIPmt|IOPmt|Balance"});${0}
+# replace function
+snippet replace
+	replace(${1:"haystack"}, ${2:"needle"}, ${3:"replacement"});${0}
+# strlen function
+snippet strlen
+	strlen(${1:"string"});${0}
+# substring function
+snippet substring
+	substring(${1:"haystack"}, ${2:"startIndex"}, ${3:"length"});${0}
 #
 #
 #
@@ -170,7 +206,7 @@ snippet indexof
 snippet cond
 	condition ${1:identifier} ("${2:system_name}", ${3:category}, ${4:priorto}, "${5:image_doc_type}", "${6:External}",
 	                           "${7:Stipulation Text}");
-	${8}
+	${0}
 #
 #
 #
@@ -181,11 +217,11 @@ snippet cond
 # Findings Message
 snippet messf
 	message(findings, "${1:findings message}");
-	${2}
+	${0}
 # Exception Message
 snippet messe
 	message(exception, "${1:exception message}");
-	${2}
+	${0}
 # Temp Snippet
 snippet hase0
 	rule Parse-Stage-0${1:num}()
@@ -194,20 +230,16 @@ snippet hase0
 	    tempCode = Concat(IN "0", IN "$1");  // Have to use Concat so AMS doesn't drop the leading zero.
 	    tempNumber = indexof(IN tempString, IN tempCode);
 	  end
-	
 	end // rule
-	
 	
 	rule Set-Stage-0$1()
 	  if(tempNumber >= 0)
 	  then
 	    hasEntered$1 = "Y";
 	  end
-	
 	end // rule
 	
-	
-	${2}
+	${0}
 # Temp Snippet
 snippet hasen
 	rule Parse-Stage-${1:num}()
@@ -216,17 +248,13 @@ snippet hasen
 	    tempCode = "$1";
 	    tempNumber = indexof(IN tempString, IN tempCode);
 	  end
-	
 	end // rule
-	
 	
 	rule Set-Stage-$1()
 	  if(tempNumber >= 0)
 	  then
 	    hasEntered$1 = "Y";
 	  end
-
 	end // rule
 	
-	
-	${2}
+	${0}
