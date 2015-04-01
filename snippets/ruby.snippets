@@ -939,11 +939,11 @@ snippet itsn
 snippet desc
 	describe ${1:class_name} do
 		${2}
-	end # describe $1
+	end
 snippet cont
 	context "${1:message}" do
 		${2}
-	end # context "$1"
+	end
 snippet bef
 	before :${1:each} do
 		${2}
@@ -970,6 +970,11 @@ snippet itb
 	it_behaves_like "${1:shared examples name}"${2}
 
 # kTech
+#rspec
+snippet support_helper
+	require 'pathname'
+	require Pathname(__FILE__).ascend{|d| h=d+'spec_helper.rb'; break h if h.file?}
+	${0}
 snippet filecmt
 	##############################################################################
 	# File::    `Filename()`.rb
